@@ -1,0 +1,80 @@
+---
+title: "Tasks & Initiatives"
+description: "Organize your work with tasks, initiatives, and checklists"
+---
+
+## Overview
+
+OpenBacklog organizes work into a simple hierarchy:
+
+- **Initiatives** group related work toward a goal
+- **Tasks** are individual units of work
+- **Checklists** break tasks into smaller steps
+
+This structure gives you enough organization to track complex projects without the overhead of enterprise tools.
+
+## Initiatives
+
+Initiatives are containers for related tasks. Use them to group work that contributes to a single goal or feature.
+
+**When to create an initiative:**
+- Starting a new feature or project
+- Addressing a specific user need
+- Tackling a technical improvement
+
+**Initiative fields:**
+- **Title** - What you're building or fixing
+- **Description** - Context, goals, and acceptance criteria
+- **Status** - Backlog, To Do, In Progress, or Done
+
+## Tasks
+
+Tasks are the units of work within initiatives. Each task represents something you can complete in a focused work session.
+
+**Task fields:**
+- **Title** - Clear, actionable description
+- **Description** - Details, notes, and implementation context
+- **Status** - Backlog → To Do → In Progress → Done
+- **Checklist** - Subtasks or steps to complete
+
+<Tip>
+Keep tasks small enough to complete in one session. If a task feels too big, break it into multiple tasks or use checklists.
+</Tip>
+
+## Status Workflow
+
+Both initiatives and tasks follow the same status workflow:
+
+```
+BACKLOG → TO_DO → IN_PROGRESS → DONE
+```
+
+| Status | Meaning |
+|--------|---------|
+| **Backlog** | Captured but not committed to |
+| **To Do** | Committed and ready to start |
+| **In Progress** | Actively being worked on |
+| **Done** | Completed |
+
+## Checklists
+
+Checklists break tasks into smaller steps. They're useful for:
+
+- Multi-step implementations
+- Review or QA processes
+- Remembering edge cases
+
+Each checklist item can be marked complete independently, giving you progress visibility within a task.
+
+## Working with AI
+
+When connected via MCP, your AI assistant can help manage tasks:
+
+```text
+"Create a task for implementing user login"
+"Add a checklist to the current task with test cases"
+"Move the auth task to In Progress"
+"What tasks are blocking the login initiative?"
+```
+
+See [Claude Code Setup](/mcp-integration/claude-code) to connect your AI.

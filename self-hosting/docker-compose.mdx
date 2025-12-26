@@ -1,0 +1,111 @@
+---
+title: "Docker Compose Deployment"
+description: "Deploy OpenBacklog with Docker Compose"
+---
+
+## Architecture
+
+OpenBacklog runs as a set of Docker containers:
+
+| Service | Description |
+|---------|-------------|
+| **FastAPI** | Python API server handling all application logic |
+| **PostgreSQL** | Primary database for all data storage |
+| **PostgREST** | REST API layer for direct database access |
+
+## Prerequisites
+
+- Docker and Docker Compose
+- 2GB RAM minimum (4GB recommended)
+- Domain name (optional, for production)
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/samboyd/openbacklog.git
+cd openbacklog
+
+# Start with development config
+docker-compose --env-file .env.development up
+```
+
+## Production Setup
+
+For production deployments, create a custom environment file:
+
+```bash
+# Copy the development config as a starting point
+cp .env.development .env.production
+
+# Edit with your production values
+nano .env.production
+```
+
+### Key Environment Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `database_name` | PostgreSQL database name | `openbacklog` |
+| `database_app_user_username` | Database user | `app_user` |
+| `database_app_user_password` | Database password | `secure_password` |
+| `POSTGRES_PORT` | External PostgreSQL port | `5432` |
+| `FASTAPI_PORT` | External API port | `8000` |
+
+Start with your production config:
+
+```bash
+docker-compose --env-file .env.production up -d
+```
+
+## Health Checks
+
+OpenBacklog includes health checks for monitoring:
+
+**FastAPI:**
+```bash
+curl http://localhost:8000/healthcheck
+```
+
+**PostgreSQL:** The container includes a built-in health check that verifies database readiness.
+
+## Data Persistence
+
+Data is stored in Docker volumes:
+
+| Volume | Purpose |
+|--------|---------|
+| `postgres-data` | Database files |
+| `secrets` | Encrypted credentials and API keys |
+| `uploads` | User-uploaded files |
+
+<Warning>
+Back up the `postgres-data` volume regularly. This contains all your tasks, initiatives, and planning data.
+</Warning>
+
+## Backup and Restore
+
+### Backup
+
+```bash
+# Backup the database
+docker exec openbacklog-postgres-1 pg_dump -U postgres openbacklog > backup.sql
+```
+
+### Restore
+
+```bash
+# Restore from backup
+docker exec -i openbacklog-postgres-1 psql -U postgres openbacklog < backup.sql
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Connect AI" icon="plug" href="/mcp-integration/claude-code">
+    Set up Claude Code for AI-powered management.
+  </Card>
+  <Card title="Explore Features" icon="sparkles" href="/features/tasks-initiatives">
+    Learn about tasks, initiatives, and checklists.
+  </Card>
+</CardGroup>

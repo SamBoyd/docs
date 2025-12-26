@@ -7,7 +7,7 @@
     "light": "#7FAAAA",
     "dark": "#557878"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/favicon.ico",
   "logo": {
     "light": "/logo/ob_v2_64x64.png",
     "dark": "/logo/ob_v2_64x64.png"
@@ -22,6 +22,25 @@
             "pages": [
               "index",
               "quickstart"
+            ]
+          },
+          {
+            "group": "MCP Integration",
+            "pages": [
+              "mcp-integration/claude-code"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "features/strategic-planning",
+              "features/tasks-initiatives"
+            ]
+          },
+          {
+            "group": "Self-Hosting",
+            "pages": [
+              "self-hosting/docker-compose"
             ]
           }
         ]

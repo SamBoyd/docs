@@ -1,0 +1,84 @@
+---
+title: "Claude Code Setup"
+description: "Connect Claude Code to OpenBacklog via MCP"
+---
+
+## Overview
+
+OpenBacklog integrates with AI tools via the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/). This lets you use your existing Claude subscription to manage tasks, create initiatives, and plan your roadmap using natural language.
+
+**BYOA (Bring Your Own AI):** OpenBacklog doesn't include AI - it connects to AI tools you already use.
+
+## Step 1: Install Claude Code
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+See the [official Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code) for detailed installation instructions.
+
+## Step 2: Configure MCP Server
+
+Add OpenBacklog to your Claude Code MCP configuration. Use the Claude Code cli:
+
+```bash
+claude mcp add --transport=http OpenBacklog localhost:8000/mcp/
+```
+
+## Available Tools
+
+Once connected, Claude Code can help you with:
+
+<AccordionGroup>
+  <Accordion icon="list-check" title="Task Management">
+    - View, create, and update tasks
+    - Manage checklists within tasks
+    - Track task status (Backlog → To Do → In Progress → Done)
+    - Search and filter tasks
+  </Accordion>
+  <Accordion icon="folder" title="Initiative Management">
+    - Create and organize initiatives
+    - Link tasks to initiatives
+    - Track initiative progress
+  </Accordion>
+  <Accordion icon="compass" title="Strategic Planning">
+    - Define and update product vision
+    - Create strategic pillars and outcomes
+    - Manage roadmap themes
+    - Link themes to outcomes
+  </Accordion>
+  <Accordion icon="book-open" title="Narrative Tools">
+    - Define heroes (user personas)
+    - Identify villains (problems to solve)
+    - Track conflicts between heroes and villains
+    - Generate "Previously On..." recaps
+  </Accordion>
+</AccordionGroup>
+
+## Example Prompts
+
+```text
+"Show me my current tasks"
+"Create a new initiative for user authentication"
+"What's my product vision?"
+"Help me break down this feature into tasks"
+"What conflicts are we trying to resolve?"
+"Give me a Previously On recap"
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion icon="circle-xmark" title="Connection refused">
+    Ensure OpenBacklog is running. Start it with:
+    ```bash
+    docker-compose --env-file .env.development up
+    ```
+  </Accordion>
+  <Accordion icon="lock" title="Authentication failed">
+    Clear your browser cookies for localhost and try authenticating again. The auth flow opens in your default browser.
+  </Accordion>
+  <Accordion icon="puzzle-piece" title="Tools not appearing">
+    Restart Claude Code after updating your MCP configuration. The tools should appear in Claude Code's tool list.
+  </Accordion>
+</AccordionGroup>
