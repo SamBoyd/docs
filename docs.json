@@ -42,6 +42,10 @@
             "pages": [
               "self-hosting/docker-compose"
             ]
+          },
+          {
+            "group": "Support",
+            "pages": ["support"]
           }
         ]
       }
