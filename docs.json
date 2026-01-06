@@ -27,7 +27,8 @@
           {
             "group": "MCP Integration",
             "pages": [
-              "mcp-integration/claude-code"
+              "mcp-integration/claude-code",
+              "mcp-integration/cursor"
             ]
           },
           {

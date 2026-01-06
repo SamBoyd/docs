@@ -1,23 +1,33 @@
 ---
-title: "Claude Code"
-description: "Connect Claude Code to OpenBacklog via MCP"
+title: "Cursor"
+description: "Connect Cursor to OpenBacklog via MCP"
 ---
+
+## Quick Install
+
+Click to install OpenBacklog MCP servers directly in Cursor:
+
+| MCP Server | Install | Description                           |
+| ---------- | ----------- | ------------------------- |
+| OpenBacklog Coding MCP Server     | <a class="mcplink" href="cursor://anysphere.cursor-deeplink/mcp/install?name=OpenBacklogCoding&config=eyJ1cmwiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvbWNwL2V4ZWN1dGlvbiJ9">+ Add to Cursor</a> | Minimal toolset for implementation workflows |
+| OpenBacklog Planning MCP Server     | <a class="mcplink" href="cursor://anysphere.cursor-deeplink/mcp/install?name=OpenBacklogPlanning&config=eyJ1cmwiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvbWNwL3BsYW5uaW5nIn0=">+ Add to Cursor</a> | Full toolset for strategic planning              |
 
 ## Overview
 
-OpenBacklog integrates with AI tools via the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/). This lets you use your existing Claude subscription to manage tasks, create initiatives, and plan your roadmap using natural language.
+OpenBacklog integrates with AI tools via the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/). This lets you use Cursor's AI features to manage tasks, create initiatives, and plan your roadmap using natural language.
 
 **BYOA (Bring Your Own AI):** OpenBacklog doesn't include AI - it connects to AI tools you already use.
 
-## Step 1: Install Claude Code
+## Step 1: Configuration Location
 
-```bash
-npm install -g @anthropic-ai/claude-code
-```
+Cursor reads MCP server configuration from JSON files:
 
-See the [official Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code) for detailed installation instructions.
+- **Project-level:** `.cursor/mcp.json` in your project directory
+- **Global:** `~/.cursor/mcp.json` in your home directory
 
-## Step 2: Configure MCP Server
+Create or edit the appropriate file based on your preference.
+
+## Step 2: Configure MCP Servers
 
 OpenBacklog provides two MCP server modes optimized for different workflows:
 
@@ -31,6 +41,23 @@ OpenBacklog provides two MCP server modes optimized for different workflows:
 - Framework tools for vision, pillars, outcomes, themes
 - Hero, villain, and conflict management
 - Roadmap prioritization
+
+### Recommended: Dual-Server Configuration
+
+For best performance, configure both servers:
+
+```json
+{
+  "mcpServers": {
+    "OpenBacklogCoding": {
+      "url": "http://localhost:8000/mcp/execution"
+    },
+    "OpenBacklogPlanning": {
+      "url": "http://localhost:8000/mcp/planning"
+    }
+  }
+}
+```
 
 ### Why Two Servers?
 
@@ -52,26 +79,9 @@ LLMs have a fixed context window, and every MCP tool definition consumes tokens 
 - Clear mental model: "I'm coding" vs "I'm planning"
 - Better performance and lower API costs
 
-### Recommended: Dual-Server Configuration
-
-For best performance, configure both servers. Use the execution server when coding, and the strategy server when planning:
-
-```bash
-# Add execution server (minimal tools for coding)
-claude mcp add --transport=http OpenBacklogCoding localhost:8000/mcp/execution
-
-# Add strategy server (full toolset for planning)
-claude mcp add --transport=http OpenBacklogPlanning localhost:8000/mcp/planning
-```
-
-### Managing MCP Servers
-
-Once configured, you can dynamically enable and disable MCP servers during your Claude Code session using the `/mcp` command:
-
-
 ## Available Tools
 
-Once connected, Claude Code can help you with:
+Once connected, Cursor can help you with:
 
 <AccordionGroup>
   <Accordion icon="list-check" title="Task Management">
@@ -119,10 +129,16 @@ Once connected, Claude Code can help you with:
     docker-compose --env-file .env.development up
     ```
   </Accordion>
-  <Accordion icon="lock" title="Authentication failed">
-    Clear your browser cookies for localhost and try authenticating again. The auth flow opens in your default browser.
+  <Accordion icon="file-code" title="Invalid JSON configuration">
+    Verify your `mcp.json` file has valid JSON syntax. Common issues:
+    - Trailing commas after the last item
+    - Missing quotes around keys or values
+    - Mismatched braces
   </Accordion>
   <Accordion icon="puzzle-piece" title="Tools not appearing">
-    Restart Claude Code after updating your MCP configuration. The tools should appear in Claude Code's tool list.
+    Restart Cursor after updating your MCP configuration. The tools should appear when you start a new AI chat.
+  </Accordion>
+  <Accordion icon="rotate" title="Changes not taking effect">
+    Cursor caches MCP server connections. Close all Cursor windows and restart the application to reload the configuration.
   </Accordion>
 </AccordionGroup>
