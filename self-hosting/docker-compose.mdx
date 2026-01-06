@@ -27,7 +27,7 @@ git clone https://github.com/samboyd/openbacklog.git
 cd openbacklog
 
 # Start with development config
-docker-compose --env-file .env.development up
+docker-compose --env-file .env.cluster-dev up
 ```
 
 ## Production Setup
@@ -36,7 +36,7 @@ For production deployments, create a custom environment file:
 
 ```bash
 # Copy the development config as a starting point
-cp .env.development .env.production
+cp .env.cluster-dev .env.production
 
 # Edit with your production values
 nano .env.production
