@@ -45,6 +45,12 @@
             ]
           },
           {
+            "group": "API",
+            "pages": [
+              "api/reference"
+            ]
+          },
+          {
             "group": "Support",
             "pages": ["support"]
           }

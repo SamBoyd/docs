@@ -1,0 +1,37 @@
+---
+title: "API Reference"
+description: "OpenBacklog API documentation"
+---
+
+## Overview
+
+OpenBacklog exposes a REST API through PostgREST, which automatically generates endpoints from the PostgreSQL database schema.
+
+<Info>
+Full API documentation is coming soon. In the meantime, you can explore the API using Swagger UI.
+</Info>
+
+## Viewing the API with Swagger UI
+
+The PostgREST instance exposes an OpenAPI specification at its root endpoint. You can visualize and interact with the API using Swagger UI:
+
+```bash
+docker run -p 8080:8080 -e SWAGGER_JSON_URL=http://localhost:3000/ swaggerapi/swagger-ui
+```
+
+Then open [http://localhost:8080](http://localhost:8080) in your browser.
+
+<Note>
+Replace `3000` with your PostgREST port if you're using a different cluster configuration. See the [Docker Compose deployment guide](/self-hosting/docker-compose) for port mappings.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Self-Hosting" icon="server" href="/self-hosting/docker-compose">
+    Deploy OpenBacklog with Docker Compose.
+  </Card>
+  <Card title="MCP Integration" icon="plug" href="/mcp-integration/claude-code">
+    Connect AI assistants to OpenBacklog.
+  </Card>
+</CardGroup>
